@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { MENU } from '../shared/MENU';
+import MenuItem from './MenuItemComponent';
 
 class Menu extends Component {
     
@@ -21,10 +22,8 @@ class Menu extends Component {
         const renderMenuItem = ({item}) => {
             return (
                 <ListItem
-                    // bottomDivider
-                    
                     title={item.name}
-                    onPress={() => navigate('MenuInfo', { menuId: item.id})}
+                    onPress={() => navigate('MenuItem', { menuId: item.id})}
                     subtitle={item.type  +' / ' + item.calories + ' KCAL'}
                     leftAvatar={{source: require('./img/menu/salad1.png')}}
                 />

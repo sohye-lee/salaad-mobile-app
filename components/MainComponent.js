@@ -60,17 +60,6 @@ const AppNavigator = createAppContainer(MainNavigator);
 
 
 class Main extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         menu: MENU,
-    //         selectedMenu: null
-    //     };
-    // }
-
-    // onMenuSelect(menuId) {
-    //     this.setState({selectedMenu: menuId})
-    // }
 
     render() {
         return (

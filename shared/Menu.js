@@ -2,7 +2,7 @@ export const MENU = [
     {
         id: 0,
         name: "Sound Of Music",
-        image: "/assets/menu/salad1.png",
+        image: "./img/menu/salad1.png",
         featured: true,
         ingredients: ['tomatoes', 'frisee', 'onions', 'vegan meat', 'gruyere cheese', 'olives', 'lime', 'balsamic'],
         calories: 380,
@@ -11,7 +11,7 @@ export const MENU = [
     {
         id: 1,
         name: "Dr.Zhivago",
-        image: "/assets/menu/salad2.png",
+        image: "./img/menu/salad2.png",
         featured: false,
         ingredients: ['broccolis', 'cucumbers', 'grape tomatoes','paprikas','muscus'],
         calories: 340,
@@ -20,14 +20,14 @@ export const MENU = [
     {
         id: 2,
         name: "Before Sunset",
-        image: "/assets/menu/salad3.png",
+        image: "./img/menu/salad3.png",
         featured: false,
         ingredients: ['organic romaine','organic mixed green','grape tomatoes','tofus', 'cretons'],
         calories: 350,
         type: 'salad'
     },
     {
-        id: 4,
+        id: 3,
         name: "Roman Holiday",
         image: "/assets/menu/salad4.png",
         featured: false,
@@ -36,7 +36,7 @@ export const MENU = [
         type: 'salad'
     },
     {
-        id: 5,
+        id: 4,
         name: "Mamma Mia!",
         image: "/assets/menu/protein1.png",
         featured: false,
@@ -45,7 +45,7 @@ export const MENU = [
         type: 'protein'
     },
     {
-        id: 6,
+        id: 5,
         name: "In Bruges",
         image: "/assets/menu/protein2.png",
         featured: true,
@@ -54,7 +54,7 @@ export const MENU = [
         type: 'protein'
     },
     {
-        id: 7,
+        id: 6,
         name: "Before Sunrise",
         image: "/assets/menu/dessert1.png",
         featured: true,
@@ -63,7 +63,7 @@ export const MENU = [
         type: 'dessert'
     },
     {
-        id: 8,
+        id: 7,
         name: "Grace Of Monaco",
         image: "/assets/menu/dessert2.png",
         featured: false,
