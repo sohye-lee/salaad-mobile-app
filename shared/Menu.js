@@ -2,7 +2,7 @@ export const MENU = [
     {
         id: 0,
         name: "Sound Of Music",
-        image: "/assets/img/menu/salad1.png",
+        image: "/assets/menu/salad1.png",
         featured: true,
         ingredients: ['tomatoes', 'frisee', 'onions', 'vegan meat', 'gruyere cheese', 'olives', 'lime', 'balsamic'],
         calories: 380,
@@ -11,7 +11,7 @@ export const MENU = [
     {
         id: 1,
         name: "Dr.Zhivago",
-        image: "/assets/img/menu/salad2.png",
+        image: "/assets/menu/salad2.png",
         featured: false,
         ingredients: ['broccolis', 'cucumbers', 'grape tomatoes','paprikas','muscus'],
         calories: 340,
@@ -20,7 +20,7 @@ export const MENU = [
     {
         id: 2,
         name: "Before Sunset",
-        image: "/assets/img/menu/salad3.png",
+        image: "/assets/menu/salad3.png",
         featured: false,
         ingredients: ['organic romaine','organic mixed green','grape tomatoes','tofus', 'cretons'],
         calories: 350,
@@ -29,7 +29,7 @@ export const MENU = [
     {
         id: 4,
         name: "Roman Holiday",
-        image: "/assets/img/menu/salad4.png",
+        image: "/assets/menu/salad4.png",
         featured: false,
         ingredients: ['tomatoes','fresh mozzarella','italian basil','extra virgin olive oil'],
         calories: 340,
@@ -38,7 +38,7 @@ export const MENU = [
     {
         id: 5,
         name: "Mamma Mia!",
-        image: "/assets/img/menu/protein1.png",
+        image: "/assets/menu/protein1.png",
         featured: false,
         ingredients: ['boiled eggs','zuccini','parsley','brown rice','scallion'],
         calories: 350,
@@ -47,7 +47,7 @@ export const MENU = [
     {
         id: 6,
         name: "In Bruges",
-        image: "/assets/img/menu/protein2.png",
+        image: "/assets/menu/protein2.png",
         featured: true,
         ingredients: ['chicken breast','sesame','scallion','green beans'],
         calories: 490,
@@ -56,7 +56,7 @@ export const MENU = [
     {
         id: 7,
         name: "Before Sunrise",
-        image: "/assets/img/menu/dessert1.png",
+        image: "/assets/menu/dessert1.png",
         featured: true,
         ingredients: ['greek yogurt','blueberries','strawberries','kiwis','pineapples','tapiocas'],
         calories: 300,
@@ -65,7 +65,7 @@ export const MENU = [
     {
         id: 8,
         name: "Grace Of Monaco",
-        image: "/assets/img/menu/dessert2.png",
+        image: "/assets/menu/dessert2.png",
         featured: false,
         ingredients: ['almonds','cashews','peanuts','coconuts','dried cranberries','raisins'],
         calories: 450,
