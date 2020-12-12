@@ -2,6 +2,8 @@
 
 export const url = 'https://salaad-app-server.herokuapp.com/salaad';
 
+export const baseUrl = 'https://salaad-app-server.herokuapp.com/salaad';
+
 // export const fetchMenus = () => axios.get(url);
 // export const createMenu = (newMenu) => axios.post(url, newMenu);
 // export const updateMenu = (id, updatedMenu) => axios.patch(url+'/'+id, updatedMenu);

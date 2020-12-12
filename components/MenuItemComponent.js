@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
-import { MENU } from '../shared/MENU';
-import { COMMENTS } from '../shared/COMMENTS';
+import { MENU } from '../shared/menu';
+import { COMMENTS } from '../shared/comments';
 
 function RenderComments({comments}) {
     

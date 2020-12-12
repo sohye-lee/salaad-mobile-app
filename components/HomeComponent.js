@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Card, Typography } from 'react-native-elements';
-import { MENU } from '../shared/MENU';
-import { SERVICES } from '../shared/SERVICES';
-import { REVIEWS } from '../shared/REVIEWS';
+import { MENU } from '../shared/menu';
+import { SERVICES } from '../shared/services';
+import { REVIEWS } from '../shared/reviews';
 
 const RenderMenuItem = ({item}) => {
     if (item) {

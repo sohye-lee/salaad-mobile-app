@@ -6,7 +6,8 @@ export const MENU = [
         featured: true,
         ingredients: ['tomatoes', 'frisee', 'onions', 'vegan meat', 'gruyere cheese', 'olives', 'lime', 'balsamic'],
         calories: 380,
-        type: 'salad'
+        type: 'salad',
+        likeCount: 0
     },
     {
         id: 1,
@@ -15,7 +16,8 @@ export const MENU = [
         featured: false,
         ingredients: ['broccolis', 'cucumbers', 'grape tomatoes','paprikas','muscus'],
         calories: 340,
-        type: 'salad'
+        type: 'salad',
+        likeCount: 0
     },
     {
         id: 2,
@@ -24,7 +26,8 @@ export const MENU = [
         featured: false,
         ingredients: ['organic romaine','organic mixed green','grape tomatoes','tofus', 'cretons'],
         calories: 350,
-        type: 'salad'
+        type: 'salad',
+        likeCount: 0
     },
     {
         id: 3,
@@ -33,7 +36,8 @@ export const MENU = [
         featured: false,
         ingredients: ['tomatoes','fresh mozzarella','italian basil','extra virgin olive oil'],
         calories: 340,
-        type: 'salad'
+        type: 'salad',
+        likeCount: 0
     },
     {
         id: 4,
@@ -42,7 +46,8 @@ export const MENU = [
         featured: false,
         ingredients: ['boiled eggs','zuccini','parsley','brown rice','scallion'],
         calories: 350,
-        type: 'protein'
+        type: 'protein',
+        likeCount: 0
     },
     {
         id: 5,
@@ -51,7 +56,8 @@ export const MENU = [
         featured: true,
         ingredients: ['chicken breast','sesame','scallion','green beans'],
         calories: 490,
-        type: 'protein'
+        type: 'protein',
+        likeCount: 0
     },
     {
         id: 6,
@@ -60,7 +66,8 @@ export const MENU = [
         featured: true,
         ingredients: ['greek yogurt','blueberries','strawberries','kiwis','pineapples','tapiocas'],
         calories: 300,
-        type: 'dessert'
+        type: 'dessert',
+        likeCount: 0
     },
     {
         id: 7,
@@ -69,6 +76,7 @@ export const MENU = [
         featured: false,
         ingredients: ['almonds','cashews','peanuts','coconuts','dried cranberries','raisins'],
         calories: 450,
-        type: 'dessert'
+        type: 'dessert',
+        likeCount: 0
     }
 ];
