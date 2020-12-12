@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
-import { ListItem } from 'react-native-elements';
-import { MENU } from '../shared/menu';
-import MenuItem from './MenuItemComponent';
+import { FlatList, View, Text } from 'react-native';
+// import MenuItem from './MenuItemComponent';
+import { Tile } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
+import { ScrollView } from 'react-native-gesture-handler';
+
+const mapStateToProps = state => {
+    return {
+        menu: state.menu
+    }
+}
 
 class Menu extends Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            menu: MENU
-        };
-    }
 
     static navigationOptions = {
         title: 'Menu'
@@ -21,23 +22,29 @@ class Menu extends Component {
         const { navigate } = this.props.navigation;
         const renderMenuItem = ({item}) => {
             return (
-                <ListItem
+                <Tile 
                     title={item.name}
-                    onPress={() => navigate('MenuItem', { menuId: item.id})}
-                    subtitle={item.type  +' / ' + item.calories + ' KCAL'}
-                    leftAvatar={{source: require('./img/menu/salad1.png')}}
+                    titleStyle={{textShadowColor: 'rgba(0,0,0,.4)', textShadowOffset: {width: 1, height: 1}, textShadowRadius: 10}}
+                    caption={item.type.toUpperCase()+' / '+ item.calories+'kcal'}
+                    imageContainerStyle={{backgroundColor: 'rgba(0,0,0,.2)', borderColor: 'white', borderBottomWidth: .5}}
+                    featured
+                    onPress={() => navigate('MenuItem', { menuId: item.id })}
+                    imageSrc={{ uri: baseUrl + item.image }}
                 />
             );
         };
 
         return (
-            <FlatList
-                data={this.state.menu}
-                renderItem={renderMenuItem}
-                keyExtractor={item => item.id.toString()}
-            />
+            <View>
+                <FlatList
+                    data={this.props.menu.menu}
+                    renderItem={renderMenuItem}
+                    keyExtractor={item => item.id.toString()}
+                />
+                <Text style={{height: 40}}/>
+            </View>
         );
     }
 }
 
-export default Menu;
+export default connect(mapStateToProps)(Menu);

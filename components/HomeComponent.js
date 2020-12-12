@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Card, Typography } from 'react-native-elements';
-import { MENU } from '../shared/menu';
-import { SERVICES } from '../shared/services';
-import { REVIEWS } from '../shared/reviews';
+// import { MENU } from '../shared/menu';
+// import { SERVICES } from '../shared/services';
+// import { REVIEWS } from '../shared/reviews';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
+
+const mapStateToProps = state => {
+    return {
+        menu: state.menu,
+        services: state.services,
+        reviews: state.reviews
+    }
+}
 
 const RenderMenuItem = ({item}) => {
     if (item) {
@@ -11,10 +21,13 @@ const RenderMenuItem = ({item}) => {
         return (
             <Card 
                 featuredTitle={item.name}
-                image={require('./img/menu/salad4.png')}
-
+                image={{uri: baseUrl + item.image}}
+                
             >
-                <Text style={{margin: 10}}>
+                <Text style={{margin: 10, color: 'rgb(80,80,80)', textTransform: 'uppercase'}}>
+                    {item.type}
+                </Text>
+                <Text style={{margin: 10, color: 'rgb(80,80,80)'}}>
                     {item.ingredients? item.ingredients.join(', ') : item.text}
                 </Text>
             </Card>
@@ -23,50 +36,7 @@ const RenderMenuItem = ({item}) => {
     return <View />;
 }
 
-// const RenderServiceItem = ({item}) => {
-//     if (item) {
-//         return (
-//             <Card 
-//                 containerStyle={{backgroundColor:'green'}}
-//             >
-//                 <Text style={{margin: 10, fontSize: '20px'}}>
-//                     {item.name}
-//                 </Text>
-//             </Card>
-//         )
-//     }
-//     return <View />;
-// }
-
-// const RenderReviewItem = ({item}) => {
-//     if (item) {
-//         return (
-//             <Card 
-//                 containerStyle={{backgroundColor: 'blue'}}
-//             >
-//                 <Text style={{margin: 10, color: 'white'}}>
-//                     {item.text} 
-//                     - {item.name}, {item.location}
-//                 </Text>
-//             </Card>
-//         )
-//     }
-//     return <View />;
-// }
-
-// const BoxTitle = ({text}) => {
-//     <Text style={{fontSize: '20px', color: "white"}}></Text>
-// }
 class Home extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            menu: MENU,
-            services: SERVICES,
-            reviews: REVIEWS
-        }
-    }
 
     static navigationOptions = {
         title: 'Home'
@@ -75,19 +45,25 @@ class Home extends Component {
     render() {
         return (
             <ScrollView>
-                <Text style={{fontWeight: 'bold', fontSize: 30, marginTop: 10, textAlign: "center"}}>Today's Menu</Text>
-                <RenderMenuItem 
-                    item={this.state.menu[0]}
-                />
-                <RenderMenuItem 
-                    item={this.state.menu[1]}
-                />
-                <RenderMenuItem 
-                    item={this.state.menu[2]}
-                />
+                <Card
+                    title="Today's Menu"
+                    titleStyle={{color: '#2e7d32', textTransform: 'uppercase', fontSize: 22}}
+                >
+
+                    <RenderMenuItem 
+                        item={this.props.menu.menu[0]}
+                    />
+                    <RenderMenuItem 
+                        item={this.props.menu.menu[5]}
+                    />
+                    <RenderMenuItem 
+                        item={this.props.menu.menu[6]}
+                    />
+                </Card>
+                <View style={{height:20}}/>
             </ScrollView>
         )
     }
 }
 
-export default Home;
+export default connect(mapStateToProps)(Home);

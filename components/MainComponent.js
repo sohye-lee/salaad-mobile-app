@@ -5,12 +5,21 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
 import { createAppContainer }from 'react-navigation';
 import SafeAreaView from 'react-native-safe-area-view';
+import { connect } from 'react-redux';
+import { fetchMenus, fetchComments, fetchServices, fetchReviews } from '../redux/ActionCreators';
 //Components
 import Menu from './MenuComponent';
 import MenuItem from './MenuItemComponent';
 import Home from './HomeComponent';
 import About from './AboutComponent';
 import Contact from './ContactComponent';
+
+const mapDispatchToProps = {
+    fetchMenus,
+    fetchComments,
+    fetchServices,
+    fetchReviews
+};
 
 const MenuNavigator = createStackNavigator(
     {
@@ -201,6 +210,13 @@ const AppNavigator = createAppContainer(MainNavigator);
 
 class Main extends Component {
 
+    componentDidMount() {
+        this.props.fetchMenus();
+        this.props.fetchComments();
+        this.props.fetchServices();
+        this.props.fetchReviews();
+    }
+
     render() {
         return (
             <View 
@@ -244,4 +260,4 @@ class Main extends Component {
      }
  })
 
-export default Main;
+export default connect(null, mapDispatchToProps)(Main);

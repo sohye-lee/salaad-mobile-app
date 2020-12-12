@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-import { SERVICES } from '../shared/services';
+// import { SERVICES } from '../shared/services';
 import { Card, ListItem } from 'react-native-elements';
-import { ScrollView, Text, FlatList } from 'react-native';
+import { ScrollView, Text, FlatList, View } from 'react-native';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
 
-
+const mapStateToProps = state => {
+    return {
+        services: state.services,
+        reviews: state.reviews
+    }
+}
 
 const Mission = () => (
     <Card title="Delivery Food Can Be Healthier"> 
@@ -14,13 +21,6 @@ const Mission = () => (
 )
 class About extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            services: SERVICES
-        };
-    }
-
     static navigationOptions = {
         title: 'About Us'
     }
@@ -29,26 +29,48 @@ class About extends Component {
 
         const renderService = ({item}) => {
             return (
-                <ListItem
-                    title={item.name}
-                    leftAvatar={{ source: require('./img/logo.png')}}
-                />
+                <Card
+                    featuredSubtitle={item.name}
+                    featuredSubtitleStyle={{marginLeft: 120}}
+                    image={{ uri: baseUrl + item.image }}
+                    containerStyle={{border:'none'}}
+                    wrapperStyle={{borderWidth: 0}}
+                >
+                    <Text>{item.description}</Text>
+                </Card>
             );
         };
+
+        const renderReview = ({item}) => {
+            return (
+                <ListItem 
+                    bottomDivider 
+                    title={'"'+ item.text +'" \n - ' + item.author + ', ' + item.location} 
+                />
+            )
+        }
 
         return (
             <ScrollView>
                 <Mission />
                 <Card title="Meet Our Service">
                     <FlatList 
-                        data={this.state.services}
+                        data={this.props.services.services}
                         renderItem={renderService}
                         keyExtractor={item => item.id.toString()}
                     />
                 </Card>
+                <Card title="Our Customers Think...">
+                    <FlatList 
+                        data={this.props.reviews.reviews}
+                        renderItem={renderReview}
+                        keyExtractor={item => item.id.toString()}
+                    />
+                </Card>
+                <View style={{height: 20}} />
             </ScrollView>
         )
     }
 }
 
-export default About;
+export default connect(mapStateToProps)(About);

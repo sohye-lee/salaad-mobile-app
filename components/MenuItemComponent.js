@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
-import { MENU } from '../shared/menu';
-import { COMMENTS } from '../shared/comments';
+// import { MENU } from '../shared/menu';
+// import { COMMENTS } from '../shared/comments';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
+
+const mapStateToProps = state => {
+    return {
+        menu: state.menu,
+        comments: state.comments
+    }
+}
 
 function RenderComments({comments}) {
     
@@ -35,7 +44,7 @@ function RenderMenuInfo(props) {
         return (
             <Card
                 featuredTitle={menuItem.name}
-                image={require('./img/menu/salad1.png')}
+                image={{uri: baseUrl + menuItem.image}}
             >
                 <Text style={{margin: 5}}>
                     {menuItem.calories} KCAL
@@ -64,8 +73,8 @@ class MenuItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            menu: MENU,
-            comments: COMMENTS,
+            // menu: MENU,
+            // comments: COMMENTS,
             favorite: false
         };
     }
@@ -80,8 +89,8 @@ class MenuItem extends Component {
 
     render() {
         const menuId = this.props.navigation.getParam('menuId');
-        const menuItem = this.state.menu.filter(item => item.id=== menuId)[0];
-        const comments = this.state.comments.filter(comment => comment.menuId === menuId);
+        const menuItem = this.props.menu.menu.filter(item => item.id=== menuId)[0];
+        const comments = this.props.comments.comments.filter(comment => comment.menuId === menuId);
         return ( 
             <ScrollView>
                 <RenderMenuInfo 
@@ -90,9 +99,10 @@ class MenuItem extends Component {
                     markFavorite={() => this.markFavorite()}
                 />
                 <RenderComments comments={comments} />
+                <Text style={{height: 20}}/>
             </ScrollView>
         )
     }
 }
 
-export default MenuItem;
+export default connect(mapStateToProps)(MenuItem);
