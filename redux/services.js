@@ -2,7 +2,7 @@ import * as ActionTypes from './ActionTypes';
 
 export const services = (state = {  isLoading: true,
                                     errMess: null,
-                                    menu: []}, action) => {
+                                    services: []}, action) => {
 
         switch (action.type) {
         case ActionTypes.ADD_SERVICES:

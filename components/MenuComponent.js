@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { FlatList, View, Text } from 'react-native';
-// import MenuItem from './MenuItemComponent';
 import { Tile } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
-import { ScrollView } from 'react-native-gesture-handler';
+import Loading from './LoadingComponent';
 
 const mapStateToProps = state => {
     return {
@@ -33,6 +32,18 @@ class Menu extends Component {
                 />
             );
         };
+
+        if (this.props.menu.isLoading) {
+            return <Loading />;
+        }
+
+        if (this.props.menu.errMess) {
+            return (
+                <View>
+                    <Text>{this.props.menu.errMess}</Text>
+                </View>
+            )
+        }
 
         return (
             <View>

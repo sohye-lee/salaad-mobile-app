@@ -3,7 +3,7 @@ import * as ActionTypes from './ActionTypes';
 
 export const reviews = (state = {  isLoading: true,
                                     errMess: null,
-                                    menu: []}, action) => {
+                                    reviews: []}, action) => {
 
         switch (action.type) {
         case ActionTypes.ADD_REVIEWS:

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { Card, Typography } from 'react-native-elements';
-// import { MENU } from '../shared/menu';
-// import { SERVICES } from '../shared/services';
-// import { REVIEWS } from '../shared/reviews';
+import { Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
+import Loading from './LoadingComponent';
 
 const mapStateToProps = state => {
     return {
@@ -15,7 +13,21 @@ const mapStateToProps = state => {
     }
 }
 
-const RenderMenuItem = ({item}) => {
+const RenderMenuItem = (props) => {
+    const {item} = props;
+
+    if (props.isLoading) {
+        return <Loading />;
+    }
+
+    if (props.errMess) {
+        return (
+            <View>
+                <Text>{props.errMess}</Text>
+            </View>
+        )
+    }
+
     if (item) {
         console.log(item.image)
         return (
@@ -52,12 +64,18 @@ class Home extends Component {
 
                     <RenderMenuItem 
                         item={this.props.menu.menu[0]}
+                        isLoading={this.props.menu.isLoading}
+                        errMess={this.props.menu.errMess}
                     />
                     <RenderMenuItem 
                         item={this.props.menu.menu[5]}
+                        isLoading={this.props.menu.isLoading}
+                        errMess={this.props.menu.errMess}
                     />
                     <RenderMenuItem 
                         item={this.props.menu.menu[6]}
+                        isLoading={this.props.menu.isLoading}
+                        errMess={this.props.menu.errMess}
                     />
                 </Card>
                 <View style={{height:20}}/>

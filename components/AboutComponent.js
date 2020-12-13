@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-// import { SERVICES } from '../shared/services';
 import { Card, ListItem } from 'react-native-elements';
 import { ScrollView, Text, FlatList, View } from 'react-native';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
+import Loading from './LoadingComponent';
 
 const mapStateToProps = state => {
     return {
@@ -47,6 +47,32 @@ class About extends Component {
                     bottomDivider 
                     title={'"'+ item.text +'" \n - ' + item.author + ', ' + item.location} 
                 />
+            )
+        }
+
+        if (this.props.services.services.isLoading) {
+            return (
+                <ScrollView>
+                    <Mission />
+                    <Card
+                        title='Meet Our Service'
+                    >
+                        <Loading />
+                    </Card>
+                </ScrollView>
+            )
+        }
+
+        if (this.props.reviews.reviews.isLoading) {
+            return (
+                <ScrollView>
+                    <Mission />
+                    <Card
+                        title='Our Customers Think...'
+                    >
+                        <Loading />
+                    </Card>
+                </ScrollView>
             )
         }
 
