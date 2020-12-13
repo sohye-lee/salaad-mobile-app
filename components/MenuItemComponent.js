@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
-// import { MENU } from '../shared/menu';
-// import { COMMENTS } from '../shared/comments';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
+import { postFavorite } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
     return {
         menu: state.menu,
-        comments: state.comments
+        comments: state.comments,
+        favorites: state.favorites
     }
+}
+
+const mapDispatchToProps = {
+    postFavorite: menuId => (postFavorite(menuId))
 }
 
 function RenderComments({comments}) {
@@ -70,21 +74,12 @@ function RenderMenuInfo(props) {
 
 class MenuItem extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            // menu: MENU,
-            // comments: COMMENTS,
-            favorite: false
-        };
-    }
-
     static navigationOptions = {
         title: 'Menu Information'
     }
 
-    markFavorite() {
-        this.setState({favorite: true})
+    markFavorite(menuId) {
+        this.props.postFavorite(menuId);
     }
 
     render() {
@@ -95,8 +90,8 @@ class MenuItem extends Component {
             <ScrollView>
                 <RenderMenuInfo 
                     menuItem={menuItem} 
-                    favorite={this.state.favorite} 
-                    markFavorite={() => this.markFavorite()}
+                    favorite={this.props.favorites.includes(menuId)} 
+                    markFavorite={() => this.markFavorite(menuId)}
                 />
                 <RenderComments comments={comments} />
                 <Text style={{height: 20}}/>
@@ -105,4 +100,4 @@ class MenuItem extends Component {
     }
 }
 
-export default connect(mapStateToProps)(MenuItem);
+export default connect(mapStateToProps, mapDispatchToProps)(MenuItem);

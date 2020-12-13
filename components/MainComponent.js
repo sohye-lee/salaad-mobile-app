@@ -13,6 +13,7 @@ import MenuItem from './MenuItemComponent';
 import Home from './HomeComponent';
 import About from './AboutComponent';
 import Contact from './ContactComponent';
+import Order from './OrderComponent';
 
 const mapDispatchToProps = {
     fetchMenus,
@@ -27,7 +28,7 @@ const MenuNavigator = createStackNavigator(
             screen: Menu,
             navigationOptions: ({navigation}) => ({
                 headerLeft: <Icon 
-                    name='list'
+                    name='cutlery'
                     type='font-awesome'
                     iconStyle={styles.stackIcon}
                     onPress={() => navigation.toggleDrawer()}
@@ -73,6 +74,29 @@ const HomeNavigator = createStackNavigator(
     }
 );
 
+const OrderNavigator = createStackNavigator(
+    {
+        ORder: { screen: Order }
+    },
+    {
+        defaultNavigationOptions: ({navigation}) =>({
+            headerStyle: {
+                backgroundColor: '#202020'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            },
+            headerLeft: <Icon 
+                name='calendar-o'
+                type='font-awesome'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}
+            />
+        })
+    }
+);
+
 const AboutNavigator = createStackNavigator(
     {
         About: {screen: About}
@@ -87,7 +111,7 @@ const AboutNavigator = createStackNavigator(
                 color: '#fff'
             },
             headerLeft: <Icon 
-                name='info-circle'
+                name='handshake-o'
                 type='font-awesome'
                 iconStyle={styles.stackIcon}
                 onPress={() => navigation.toggleDrawer()}
@@ -110,7 +134,7 @@ const ContactNavigator = createStackNavigator(
                 color: '#fff'
             },
             headerLeft: <Icon 
-                name='info-circle'
+                name='phone'
                 type='font-awesome'
                 iconStyle={styles.stackIcon}
                 onPress={() => navigation.toggleDrawer()}
@@ -160,7 +184,21 @@ const MainNavigator = createDrawerNavigator(
             navigationOptions: {
                 drawerIcon: ({tintColor}) => (
                     <Icon 
-                        name='list'
+                        name='cutlery'
+                        type='font-awesome'
+                        size={24}
+                        color={tintColor}
+                    />
+                )
+            }
+        },
+        Order: { 
+            screen: OrderNavigator,
+            navigationOptions: {
+                drawerLabel: 'Order',
+                drawerIcon: ({tintColor}) => (
+                    <Icon 
+                        name='calendar-o'
                         type='font-awesome'
                         size={24}
                         color={tintColor}
@@ -174,7 +212,7 @@ const MainNavigator = createDrawerNavigator(
                 drawerLabel: 'About Us',
                 drawerIcon: ({tintColor}) => (
                     <Icon 
-                        name='info-circle'
+                        name='handshake-o'
                         type='font-awesome'
                         size={24}
                         color={tintColor}
@@ -188,7 +226,7 @@ const MainNavigator = createDrawerNavigator(
                 drawerLabel: 'Contact Us',
                 drawerIcon: ({tintColor}) => (
                     <Icon 
-                        name='address-card'
+                        name='phone'
                         type='font-awesome'
                         size={24}
                         color={tintColor}
