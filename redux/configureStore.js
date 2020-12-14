@@ -5,6 +5,7 @@ import { menu } from './menu';
 import { comments } from './comments';
 import { services } from './services';
 import { reviews } from './reviews';
+import { favorites } from './favorites';
 
 export const ConfigureStore = () => {
     const store = createStore(
@@ -12,7 +13,8 @@ export const ConfigureStore = () => {
             menu,
             comments,
             services,
-            reviews
+            reviews,
+            favorites
         }),
         applyMiddleware(thunk, logger)
     );

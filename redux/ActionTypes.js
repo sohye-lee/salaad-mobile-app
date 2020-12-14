@@ -5,6 +5,7 @@ export const MENUS_FAILED = 'MENUS_FAILED';
 export const ADD_COMMENTS = 'ADD_COMMENTS';
 export const COMMENTS_FAILED = 'COMMENTS_FAILED';
 
+export const ADD_COMMENT = 'ADD_COMMENT';
 
 export const ADD_SERVICES = 'ADD_SERVICES';
 export const SERVICES_FAILED = 'SERVICES_FAILED';
@@ -15,3 +16,4 @@ export const REVIEWS_FAILED = 'REVIEWS_FAILED';
 export const REVIEWS_LOADING = 'REVIEWS_LOADING';
 
 export const ADD_FAVORITE = 'ADD_FAVORITE';
+export const LIKE_MENU = 'LIKE_MENU';

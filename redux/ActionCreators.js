@@ -31,6 +31,26 @@ export const addComments = comments => ({
     payload: comments
 });
 
+export const postComment = (menuId, rating, author, comment) => dispatch => {
+
+    const newComment = {
+        menuId,
+        rating,
+        author,
+        comment
+    };
+    newComment.date = new Date().toISOString();
+
+    setTimeout(()=> {
+        dispatch(addComment(newComment));
+    }, 1000);
+};
+
+export const addComment = comment => ({
+    type: ActionTypes.ADD_COMMENT,
+    payload: comment
+})
+
 export const fetchMenus = () => dispatch => {
 
     dispatch(menusLoading());
@@ -140,4 +160,16 @@ export const reviewsFailed = errMess => ({
 export const addReviews = reviews => ({
     type: ActionTypes.ADD_REVIEWS,
     payload: reviews
+});
+
+export const postFavorite = menuId => dispatch => {
+    setTimeout(() => {
+        dispatch(addFavorite(menuId));
+    }, 1000);
+};
+
+export const addFavorite = menuId => ({
+    type: ActionTypes.ADD_FAVORITE,
+    payload: menuId
 })
+
