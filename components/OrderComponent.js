@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, StyleSheet, Image,
-         Picker, Switch, Button, TextInput } from 'react-native';
+         Picker, Switch, Button, TextInput, Modal } from 'react-native';
+import { Input } from 'react-native-elements';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
@@ -20,12 +21,13 @@ class Order extends Component {
             menuId: 0,
             quantity: 1,
             name: '',
-            phone: 0,
+            phone: '',
             message: '',
             pickup: false,
             date: new Date(),
             showCalendar: false,
-            mode: 'date'
+            mode: 'date',
+            showModal: false
         };
     }
 
@@ -43,16 +45,25 @@ class Order extends Component {
     }
 
     handleOrder() {
-        console.log(JSON.stringify(this.state));
+        // console.log(JSON.stringify(this.state));
+        this.toggleModal();
+    }
+
+    toggleModal() {
+        this.setState({showModal: !this.state.showModal});
+    }
+
+    resetForm() {
         this.setState({
             menuId: 0,
             quantity: 1,
             name: '',
-            phone: 0,
+            phone: '',
             pickup: false,
             date: new Date(),
             showCalendar: false,
-            mode: this.mode
+            mode: this.mode,
+            showModal: false
         });
     }
 
@@ -139,13 +150,13 @@ class Order extends Component {
                         style={styles.formItem}
                     />
                 )}
-                <View style={styles.formRow}>
-                    <Text style={styles.formLabel}>Your Name</Text>
-                    <TextInput style={styles.formItem2} placeholder="name" onChange={name => this.setState({name: name})}/>
+                <View style={{marginHorizontal: 20}}>
+                    {/* <Text style={styles.formLabel}>Your Name</Text> */}
+                    <Input placeholderTextColor="rgba(0,0,0,.3)" containerStyle={{padding: 0}} inputStyle={{backgroundColor: 'rgba(130,130,130,.1)', paddingLeft: 10}} placeholder="name" onChangeText={nameInput => this.setState({name: nameInput})}/>
                 </View>
-                <View style={styles.formRow}>
-                    <Text style={styles.formLabel}>Phone #</Text>
-                    <TextInput style={styles.formItem2} placeholder="only numbers" onChange={phone => this.setState({phone: phone})}/>
+                <View style={{marginHorizontal: 20}}>
+                    {/* <Text style={styles.formLabel}>Phone #</Text> */}
+                    <Input placeholderTextColor="rgba(0,0,0,.3)" containerStyle={{padding: 0}} inputStyle={{backgroundColor: 'rgba(130,130,130,.1)', paddingLeft: 10}} placeholder="phone" onChangeText={phoneInput => this.setState({phone: phoneInput})}/>
                 </View>
                 <View style={styles.formRow}>
                     <Button 
@@ -155,6 +166,48 @@ class Order extends Component {
                         accessibilityLabel="Tap me to confirm your order"
                     />
                 </View>
+                <Modal
+                    animationType={'slide'}
+                    transparent={false}
+                    visible={this.state.showModal}
+                    onRequestClose={() => this.toggleModal()}
+                >
+                    <View style={styles.modal}>
+                        <Text style={styles.modalTitle}>Your Order</Text>
+                        <View style={{alignItems: 'center'}}>
+                            <Image 
+                                source={{uri: baseUrl+this.props.menu.menu[this.state.menuId].image}} 
+                                style={{height: 150, width: 150}}
+                            />
+                        </View>
+                        <Text style={styles.modalText}>
+                            Menu : {this.props.menu.menu[this.state.menuId].name}
+                        </Text>
+                        <Text style={styles.modalText}>
+                            Quantity : {this.state.quantity}
+                        </Text>
+                        <Text style={styles.modalText}>
+                            Pickup at store? : {this.state.pickup ? 'Yes' : 'No'}
+                        </Text>
+                        <Text style={styles.modalText}>
+                            Date & Time : {this.state.date.toLocaleDateString('en-US')} at {this.state.date.toLocaleTimeString({'timeZone': 'America/New_York'})}
+                        </Text>
+                        <Text style={styles.modalText}>
+                            Name : {this.state.name} 
+                        </Text>
+                        <Text style={styles.modalText}>
+                            Phone : {this.state.phone}
+                        </Text>
+                        <Button 
+                            onPress={() => {
+                                this.toggleModal();
+                                this.resetForm();
+                            }}
+                            color="#1faa00"
+                            title="Submit"
+                        />
+                    </View>
+                </Modal>
             </ScrollView>
         )
     }
@@ -185,7 +238,7 @@ const styles = StyleSheet.create({
     formItem: {
         flex: 1
     },
-    formItem2: {
+    inputItem: {
         borderBottomWidth: 1,
         width: 160,
         borderBottomColor: 'rgb(50,50,50)',
@@ -194,6 +247,22 @@ const styles = StyleSheet.create({
     },
     pickerLabel: {
         flexBasis: 70
+    },
+    modal: {
+        justifyContent: 'center',
+        margin: 20
+    },
+    modalTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        backgroundColor: '#1faa00',
+        color: '#fff',
+        textAlign: 'center',
+        marginBottom: 20
+    },
+    modalText: {
+        fontSize: 18,
+        margin: 10
     }
 })
 

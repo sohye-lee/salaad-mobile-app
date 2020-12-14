@@ -14,6 +14,7 @@ import Home from './HomeComponent';
 import About from './AboutComponent';
 import Contact from './ContactComponent';
 import Order from './OrderComponent';
+import Favorites from './FavoritesComponent';
 
 const mapDispatchToProps = {
     fetchMenus,
@@ -76,7 +77,7 @@ const HomeNavigator = createStackNavigator(
 
 const OrderNavigator = createStackNavigator(
     {
-        ORder: { screen: Order }
+        Order: { screen: Order }
     },
     {
         defaultNavigationOptions: ({navigation}) =>({
@@ -96,6 +97,29 @@ const OrderNavigator = createStackNavigator(
         })
     }
 );
+
+const FavoritesNavigator = createStackNavigator(
+    {
+        Favorites : { screen: Favorites }
+    },
+    {
+        defaultNavigationOptions: ({navigation}) => ({
+            headerStyle: {
+                backgroundColor: '#202020'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            },
+            headerLeft: <Icon 
+                name='heart'
+                type='font-awesome'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}
+            />
+        })
+    }
+)
 
 const AboutNavigator = createStackNavigator(
     {
@@ -199,6 +223,20 @@ const MainNavigator = createDrawerNavigator(
                 drawerIcon: ({tintColor}) => (
                     <Icon 
                         name='calendar-o'
+                        type='font-awesome'
+                        size={24}
+                        color={tintColor}
+                    />
+                )
+            }
+        },
+        Favorites: {
+            screen: FavoritesNavigator,
+            navigationOptions: {
+                drawerLabel: 'My Favorites',
+                drawerIcon: ({tintColor}) => (
+                    <Icon 
+                        name='heart'
                         type='font-awesome'
                         size={24}
                         color={tintColor}
