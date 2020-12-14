@@ -6,6 +6,7 @@ export const ADD_COMMENTS = 'ADD_COMMENTS';
 export const COMMENTS_FAILED = 'COMMENTS_FAILED';
 
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export const ADD_SERVICES = 'ADD_SERVICES';
 export const SERVICES_FAILED = 'SERVICES_FAILED';
