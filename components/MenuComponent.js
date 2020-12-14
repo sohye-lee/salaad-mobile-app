@@ -25,7 +25,8 @@ class Menu extends Component {
                     title={item.name}
                     titleStyle={{textShadowColor: 'rgba(0,0,0,.4)', textShadowOffset: {width: 1, height: 1}, textShadowRadius: 10}}
                     caption={item.type.toUpperCase()+' / '+ item.calories+'kcal'}
-                    imageContainerStyle={{backgroundColor: 'rgba(0,0,0,.2)', borderColor: 'white', borderBottomWidth: .5}}
+                    imageContainerStyle={{backgroundColor: 'rgba(0,0,0,.2)', borderColor: 'white', borderBottomWidth: .5, height: 380}}
+                    containerStyle={{height: 380}}
                     featured
                     onPress={() => navigate('MenuItem', { menuId: item.id })}
                     imageSrc={{ uri: baseUrl + item.image }}

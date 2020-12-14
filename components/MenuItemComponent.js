@@ -63,6 +63,7 @@ function RenderMenuInfo(props) {
             <Card
                 featuredTitle={menuItem.name}
                 image={{uri: baseUrl + menuItem.image}}
+                imageStyle={{height:400}}
             >
                 <Text style={{margin: 5}}>
                     {menuItem.calories} KCAL
@@ -138,6 +139,8 @@ class MenuItem extends Component {
         const menuId = this.props.navigation.getParam('menuId');
         const menuItem = this.props.menu.menu.filter(item => item.id=== menuId)[0];
         const comments = this.props.comments.comments.filter(comment => comment.menuId === menuId);
+
+
         return ( 
             <ScrollView>
                 <RenderMenuInfo 
