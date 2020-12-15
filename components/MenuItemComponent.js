@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList, Modal, Button, StyleSheet } from 'react-native';
+import { Text, View, ScrollView, FlatList, 
+         Modal, Button, StyleSheet,
+         Alert, PanResponder } from 'react-native';
 import { Card, Icon, Rating, Input } from 'react-native-elements';
+import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { postFavorite, postComment } from '../redux/ActionCreators';
@@ -44,13 +47,15 @@ function RenderComments({comments}) {
     }
 
     return (
-        <Card title="Comments">
-            <FlatList 
-                data={comments}
-                renderItem={renderCommentItem}
-                keyExtractor={item => item.id.toString()}
-            />
-        </Card>
+        <Animatable.View animation='fadeInUpBig' duration={1000} delay={500}>
+            <Card title="Comments">
+                <FlatList 
+                    data={comments}
+                    renderItem={renderCommentItem}
+                    keyExtractor={item => item.id.toString()}
+                />
+            </Card>
+        </Animatable.View>
     );
 }
 
@@ -58,40 +63,78 @@ function RenderMenuInfo(props) {
     
     const {menuItem} = props;
 
+    const recognizeDrag = ({dx}) => (dx < -200) ? true: false;
+
+    const panResponder = PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onPanResponderEnd: (e, gestureState) => {
+            console.log('pan responder end', gestureState);
+            if (recognizeDrag(gestureState)) {
+                Alert.alert(
+                    'Add Favorite?',
+                    'Are you sure you wish to add \"' + menuItem.name + ' to favorites?',
+                    [
+                        {
+                            text: 'Cancel',
+                            style: 'cancel',
+                            onPress: () => console.log('Add Favorite Canceled')
+                        },
+                        {
+                            text: 'OK',
+                            onPress: () => props.favorite ?  
+                                console.log('Already set as a favorite') 
+                                : props.markFavorite()
+                        }
+                    ],
+                    { cancelable: true }
+                );
+            }
+            return true
+        }
+
+    })
+
     if (menuItem) {
         return (
-            <Card
-                featuredTitle={menuItem.name}
-                image={{uri: baseUrl + menuItem.image}}
-                imageStyle={{height:400}}
+            <Animatable.View 
+                animation='fadeInDownBig' 
+                duration={1000} 
+                delay={500}
+                {...panResponder.panHandlers}
             >
-                <Text style={{margin: 5}}>
-                    {menuItem.calories} KCAL
-                </Text>
-                <Text style={{margin: 5}}>
-                    {menuItem.ingredients.join(', ')}
-                </Text>
-                <View style={styles.cardRow}>
-                    <Icon 
-                        name={props.favorite ? 'heart': 'heart-o'}
-                        type='font-awesome'
-                        color='#d81b60'
-                        raised
-                        reverse
-                        onPress={() => props.favorite ? 
-                            console.log('Already set as a favorite') 
-                            : props.markFavorite()}
-                    />
-                    <Icon 
-                        name={'pencil'}
-                        type='font-awesome'
-                        color='#1faa00'
-                        raised
-                        reverse
-                        onPress={() => props.onShowModal()}
-                    />
-                </View>
-            </Card>
+                <Card
+                    featuredTitle={menuItem.name}
+                    image={{uri: baseUrl + menuItem.image}}
+                    imageStyle={{height:400}}
+                    >
+                    <Text style={{margin: 5}}>
+                        {menuItem.calories} KCAL
+                    </Text>
+                    <Text style={{margin: 5}}>
+                        {menuItem.ingredients.join(', ')}
+                    </Text>
+                    <View style={styles.cardRow}>
+                        <Icon 
+                            name={props.favorite ? 'heart': 'heart-o'}
+                            type='font-awesome'
+                            color='#d81b60'
+                            raised
+                            reverse
+                            onPress={() => props.favorite ? 
+                                console.log('Already set as a favorite') 
+                                : props.markFavorite()}
+                                />
+                        <Icon 
+                            name={'pencil'}
+                            type='font-awesome'
+                            color='#1faa00'
+                            raised
+                            reverse
+                            onPress={() => props.onShowModal()}
+                            />
+                    </View>
+                </Card>
+            </Animatable.View>
         )
     }
     return <View />;

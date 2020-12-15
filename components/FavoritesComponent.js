@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList, View, Text, StyleSheet, Alert } from 'react-native';
 import { ListItem } from 'react-native-elements';
+import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { SwipeRow } from 'react-native-swipe-list-view';
@@ -81,13 +82,15 @@ class Favorites extends Component {
         }
 
         return (
-            <FlatList 
-                data={this.props.menu.menu.filter(
-                    menuItem => this.props.favorites.includes(menuItem.id)
-                )}
-                renderItem={renderFavoriteItem}
-                keyExtractor={item => item.id.toString()}
-            />
+            <Animatable.View animation="fadeInRightBig" duration={1200}>
+                <FlatList 
+                    data={this.props.menu.menu.filter(
+                        menuItem => this.props.favorites.includes(menuItem.id)
+                    )}
+                    renderItem={renderFavoriteItem}
+                    keyExtractor={item => item.id.toString()}
+                />
+            </Animatable.View>
         )
     }
 }

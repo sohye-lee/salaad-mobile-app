@@ -163,6 +163,7 @@ const ContactNavigator = createStackNavigator(
                 iconStyle={styles.stackIcon}
                 onPress={() => navigation.toggleDrawer()}
             />
+             
         })
     }
 );
@@ -179,7 +180,7 @@ const CustomDrawerContentComponent = props => (
                 </View>
                 <View style={{flex: 2}}>
                     <Text style={styles.drawerHeaderText}>
-                        Salaad
+                        salaad
                     </Text>
                 </View>
             </View>
@@ -270,13 +271,20 @@ const MainNavigator = createDrawerNavigator(
                         color={tintColor}
                     />
                 )
+                
             }
+        
+        
         },
     },
     {
         initialRouteName: 'Home',
-        drawerBackgroundColor: '#a5d6a7',
-        contentComponent: CustomDrawerContentComponent
+        drawerBackgroundColor: 'rgba(0,0,0,.8)',
+        contentComponent: CustomDrawerContentComponent,
+        contentOptions: {
+            activeTintColor: '#1faa00',
+            inactiveTintColor: 'white'
+        },
     }
 )
 
@@ -312,7 +320,7 @@ class Main extends Component {
         flex: 1,
      },
      drawerHeader: {
-        backgroundColor: '#202020',
+        // backgroundColor: '#202020',
         height: 140,
         alignItems: 'center',
         justifyContent: 'center',
@@ -322,12 +330,13 @@ class Main extends Component {
      drawerHeaderText: {
         color: '#fff',
         fontSize: 24,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        letterSpacing: 1
      },
      drawerImage: {
-        margin: 10,
-        height: 60,
-        width: 60
+        margin: 12,
+        height: 50,
+        width: 50
      },
      stackIcon: {
          marginLeft: 10,

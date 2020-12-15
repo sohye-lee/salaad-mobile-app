@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Animated } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
@@ -56,6 +56,29 @@ const RenderMenuItem = (props) => {
 
 class Home extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            scaleValue: new Animated.Value(0)
+        };
+    }
+
+    
+    animate() {
+        Animated.timing(
+            this.state.scaleValue,
+            {
+                toValue: 1,
+                duration: 1000,
+                useNativeDriver: true
+            }
+        ).start();
+    }
+        
+    componentDidMount() {
+        this.animate();
+    }
+    
     static navigationOptions = {
         title: 'Home'
     }
@@ -65,10 +88,10 @@ class Home extends Component {
         const { navigate } = this.props.navigation;
 
         return (
-            <ScrollView>
+            <Animated.ScrollView style={{transform: [{scale: this.state.scaleValue}]}}>
                 <Card
                     title="Today's Menu"
-                    titleStyle={{color: '#2e7d32', textTransform: 'uppercase', fontSize: 22}}
+                    titleStyle={{textTransform: 'uppercase', fontSize: 22}}
                 >
 
                     <RenderMenuItem 
@@ -93,7 +116,7 @@ class Home extends Component {
                     />
                 </Card>
                 <View style={{height:20}}/>
-            </ScrollView>
+            </Animated.ScrollView>
         )
     }
 }

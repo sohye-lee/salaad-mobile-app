@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, ListItem } from 'react-native-elements';
 import { ScrollView, Text, FlatList, View } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import Loading from './LoadingComponent';
@@ -50,12 +51,12 @@ class About extends Component {
             )
         }
 
-        if (this.props.services.services.isLoading) {
+        if (this.props.services.isLoading || this.props.reviews.isLoading) {
             return (
                 <ScrollView>
                     <Mission />
                     <Card
-                        title='Meet Our Service'
+                        title='Meet Best Services'
                     >
                         <Loading />
                     </Card>
@@ -63,37 +64,38 @@ class About extends Component {
             )
         }
 
-        if (this.props.reviews.reviews.isLoading) {
+        if (this.props.services.errMess || this.props.reviews.errMess) {
             return (
                 <ScrollView>
-                    <Mission />
-                    <Card
-                        title='Our Customers Think...'
-                    >
-                        <Loading />
-                    </Card>
+                    <Animatable.View animation='fadeInDown' duration={1000} delay={500}>
+                        <Mission />
+                        <Card title="Sorry, please try again">
+                            <Text>{this.props.services.errMess || this.props.reviews.errMess}</Text>
+                        </Card>
+                    </Animatable.View>
                 </ScrollView>
             )
         }
 
         return (
             <ScrollView>
-                <Mission />
-                <Card title="Meet Our Service">
-                    <FlatList 
-                        data={this.props.services.services}
-                        renderItem={renderService}
-                        keyExtractor={item => item.id.toString()}
-                    />
-                </Card>
-                <Card title="Our Customers Think...">
-                    <FlatList 
-                        data={this.props.reviews.reviews}
-                        renderItem={renderReview}
-                        keyExtractor={item => item.id.toString()}
-                    />
-                </Card>
-                <View style={{height: 20}} />
+                <Animatable.View animation='fadeInDown' duration={1000} delay={500}>
+                    <Mission />
+                    <Card title="Meet Our Service">
+                        <FlatList 
+                            data={this.props.services.services}
+                            renderItem={renderService}
+                            keyExtractor={item => item.id.toString()}
+                            />
+                    </Card>
+                    <Card title="Our Customers Think...">
+                        <FlatList 
+                            data={this.props.reviews.reviews}
+                            renderItem={renderReview}
+                            keyExtractor={item => item.id.toString()}
+                            />
+                    </Card>
+                </Animatable.View>
             </ScrollView>
         )
     }
